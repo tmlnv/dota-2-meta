@@ -1,76 +1,154 @@
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, sans-serif;
-    overflow: auto;
-  }
-  
-  .app {
-    display: flex;
-    flex-direction: column;
-    /* justify-content: flex-start; */
-    justify-content: space-evenly;
-    align-items: center;
-    height: 100%;
-    /* background: linear-gradient(to right, #55095b, #70706a); */
-    background: linear-gradient(90deg, rgba(24,170,10,1) 0%, rgba(0,0,0,1) 50%, rgba(194,3,3,1) 100%)
-  }
-  
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  overflow: auto;
+}
+
+* {
+  color: var(--text-color);
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  background: var(--bg-gradient);
+}
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+h4 {
+  font-size: 200%;
+  margin-bottom: 20px;
+}
+
+.hero-selector {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.custom-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--card-bg);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hero-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 80%;
+  padding: 20px;
+}
+
+.heroCard {
+  border-radius: 5px;
+  margin: 20px;
+  padding: 20px;
+  background: var(--card-bg);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 200px;
+}
+
+.heroCard:hover {
+  transform: scale(1.05);
+}
+
+.heroCard h2 {
+  margin-bottom: 15px;
+}
+
+.heroCard img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.heroCard p {
+  margin-top: 15px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#colorThemeToggleButton {
+  border-radius: 5px;
+  margin: 20px;
+  padding: 20px;
+  background: var(--card-bg);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+}
+
+footer p{
+  display: flex;
+  justify-content: space-between;
+  align-items: right;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Dark Mode */
+body[data-theme="dark"] {
+  --bg-gradient: linear-gradient(90deg, rgba(24,170,10,1) 0%, rgba(0,0,0,1) 50%, rgba(194,3,3,1) 100%);
+  --card-bg: #333;
+  --text-color: #fff;
+}
+
+/* Light Mode */
+body[data-theme="light"] {
+  --bg-gradient: linear-gradient(to right, #55095b, #70706a);
+  --card-bg: #f4f4f4;
+  --text-color: #333;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+
   .hero-selector {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
+      flex-direction: column;
   }
-  
-  .custom-select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    background-color: #f4f4f4;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  }
-  
+
   .hero-cards {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    width: 80%;
-    padding: 20px;
+      width: 70%;
   }
-  
+
   .heroCard {
-    border-radius: 5px;
-    margin: 20px;
-    padding: 20px;
-    background: #f4f4f4;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    text-align: center;
-    width: 200px;
+      width: 60%;
   }
-  
-  .heroCard:hover {
-    transform: scale(1.05);
+
+  footer {
+    flex-direction: column;
   }
-  
-  .heroCard h2 {
-    margin-bottom: 15px;
-  }
-  
-  .heroCard img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 15px;
-  }
-  
-  .heroCard p {
-    margin-top: 15px;
-  }
-  
+}
