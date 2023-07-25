@@ -11,12 +11,13 @@ body, html {
 }
 
 .app {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  height: 100%;
+  min-height: 100vh;
+  padding-top: 100px; /* Adjust this value as needed */
+  padding-bottom: 50px; /* Adjust this value as needed */
   background: var(--bg-gradient);
 }
 
@@ -25,19 +26,19 @@ body, html {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
   position: fixed;
   top: 0;
-  margin-bottom: 20px;
   background-color: var(--card-bg);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  z-index: 1;
 }
 
 h1 {
-  font-size: 200%;
-  margin-bottom: 20px;
+  font-size: 1.5em;
+  margin-bottom: 10px;
 }
 
 .hero-selector {
@@ -64,7 +65,7 @@ h1 {
   flex-wrap: wrap;
   width: 80%;
   padding: 20px;
-  margin: 20px; /* Adjust this value as needed */
+  margin-top: 100px; /* Adjust this value as needed */
 }
 
 .heroCard {
@@ -102,7 +103,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
   position: fixed;
   bottom: 0;
@@ -114,26 +115,17 @@ footer {
 #colorThemeToggleButton {
   border-radius: 5px;
   border-color: var(--card-bg);
-  margin: 20px;
-  padding: 20px;
+  padding: 10px;
   background: var(--card-bg);
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   text-align: center;
-  width: 100px;
-  height: 100px;
+  width: 150px;
 }
 
 #githubLink {
-  display: flex;
-  justify-content: space-between;
-  align-items: right;
-  align-self: flex-end;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  position: relative;
-  left: 90px;
+  text-decoration: none;
+  color: var(--text-color);
 }
 
 /* Dark Mode */
@@ -152,23 +144,21 @@ body[data-theme="light"] {
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-
   .hero-selector {
       flex-direction: column;
   }
 
   .hero-cards {
-      width: 70%;
-      height: 70%;
+      width: 50%;
   }
 
   .heroCard {
-      width: 60%;
-      height: 60%;
+      width: 45%;
+      height: 45%;
   }
 
   footer {
-    flex-direction: column;
-    align-items: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
   }
 }
