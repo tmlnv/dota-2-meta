@@ -1,10 +1,19 @@
 // app.js
 // import fetch from 'node-fetch';
+import "./styles.css"
 
 const OPEN_DOTA_API_URL = "https://api.opendota.com/";
 
 export const WIN_TIERS = ["1_win", "2_win", "3_win", "4_win", "5_win", "6_win", "7_win", "8_win"];
 export const PICK_TIERS = ["1_pick", "2_pick", "3_pick", "4_pick", "5_pick", "6_pick", "7_pick", "8_pick"];
+
+function toggleTheme() {
+  const body = document.body;
+  const currentTheme = body.getAttribute('data-theme');
+  body.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+}
+
+document.getElementById('colorThemeToggleButton').addEventListener('click', toggleTheme);
 
 export async function getHeroStats() {
     const response = await fetch(`${OPEN_DOTA_API_URL}api/heroStats`);
