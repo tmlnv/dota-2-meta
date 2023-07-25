@@ -11,13 +11,10 @@ body, html {
 }
 
 .app {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: start;
   min-height: 100vh;
-  padding-top: 100px; /* Adjust this value as needed */
-  padding-bottom: 50px; /* Adjust this value as needed */
   background: var(--bg-gradient);
 }
 
@@ -34,7 +31,10 @@ body, html {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   z-index: 1;
+  position: sticky;
+  top: 0;
 }
+
 
 h1 {
   font-size: 1.5em;
@@ -63,7 +63,7 @@ h1 {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  width: 80%;
+  width: 100%;
   padding: 20px;
   margin-top: 100px; /* Adjust this value as needed */
 }
@@ -110,6 +110,8 @@ footer {
   background: var(--card-bg);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  position: sticky;
+  bottom: 0;
 }
 
 #colorThemeToggleButton {
@@ -149,7 +151,7 @@ body[data-theme="light"] {
   }
 
   .hero-cards {
-      width: 50%;
+      width: 100%;
   }
 
   .heroCard {
