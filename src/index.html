@@ -7,37 +7,37 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body data-theme="dark">
+  <header class="page-header">
+    <h1 class="title">Dota 2 Minimal Meta</h1>
+    <div class="hero-selector">
+      <select id="roleSelector" class="custom-select">
+        <option value="carry">Carry</option>
+        <option value="mid">Mid</option>
+        <option value="offline">Offline</option>
+        <option value="softSupport">Soft Support</option>
+        <option value="hardSupport">Hard Support</option>
+      </select>
+      <select id="mmrSelector" class="custom-select">
+        <option value="all" selected>All</option>
+        <option value="herald">Herald</option>
+        <option value="guardian">Guardian</option>
+        <option value="Crusader">Crusader</option>
+        <option value="archon">Archon</option>
+        <option value="legend">Legend</option>
+        <option value="ancient">Ancient</option>
+        <option value="divine">Divine</option>
+        <option value="immortal">Immortal</option>
+      </select>
+    </div>
+  </header>
   <div class="app">
-    <header class="page-header">
-      <h4 class="title">Dota 2 Minimal Meta</h4>
-      <div class="hero-selector">
-        <select id="roleSelector" class="custom-select">
-          <option value="carry">Carry</option>
-          <option value="mid">Mid</option>
-          <option value="offline">Offline</option>
-          <option value="softSupport">Soft Support</option>
-          <option value="hardSupport">Hard Support</option>
-        </select>
-        <select id="mmrSelector" class="custom-select">
-          <option value="all" selected>All</option>
-          <option value="herald">Herald</option>
-          <option value="guardian">Guardian</option>
-          <option value="Crusader">Crusader</option>
-          <option value="archon">Archon</option>
-          <option value="legend">Legend</option>
-          <option value="ancient">Ancient</option>
-          <option value="divine">Divine</option>
-          <option value="immortal">Immortal</option>
-        </select>
-      </div>
-    </header>
     <div id="heroCards" class="hero-cards"></div>
     <footer id="footer">
       <div>
         <button id="colorThemeToggleButton" type="button"> Switch Color Theme</button>
-        <p>
-          <a href="https://github.com/tmlnv">Credentials</a>
-        </p>
+        <span>
+          <a id="githubLink" href="https://github.com/tmlnv" target="_blank">Credentials</a>
+        </span>
       </div>
     </footer>
   </div>
