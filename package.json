@@ -1,9 +1,12 @@
 {
   "dependencies": {
-    "node-fetch": "^3.3.1"
+    "dotenv": "^16.3.1",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "css-loader": "^6.8.1",
+    "eslint": "^8.46.0",
+    "eslint-config-google": "^0.14.0",
     "html-webpack-plugin": "^5.5.3",
     "style-loader": "^3.3.3",
     "webpack": "^5.88.2",
@@ -12,5 +15,12 @@
   },
   "scripts": {
     "start": "webpack serve --open"
-  }
+  },
+  "name": "dota_2_meta_js",
+  "description": "",
+  "version": "1.0.0",
+  "main": "open_dota_api.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
