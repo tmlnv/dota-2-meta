@@ -16,7 +16,12 @@ module.exports = {
             }
         ],
     },
-    plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
+    plugins: [
+        new HtmlWebpackPlugin({ template: './src/index.html' }),
+        new webpack.DefinePlugin({
+            "process.env": JSON.stringify(process.env),
+          }),
+    ],
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
