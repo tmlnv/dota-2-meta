@@ -47,6 +47,7 @@ async function getByRole(role) {
       byRoleList.push(hero);
     }
   }
+  console.log('ROLE IS ', role)
   console.log('ByRoleList', byRoleList);
   return byRoleList;
 }
@@ -61,16 +62,21 @@ function totalAmongTiers(hero, tiers) {
 }
 
 async function getMeta(numberTop, role, mmr) {
-  const byWinrate = {};
-  const win = mmr === undefined ? WIN_TIERS : WIN_TIERS[mmr];
-  const pick = mmr === undefined ? PICK_TIERS : PICK_TIERS[mmr];
+  let byWinRate = {};
+  let byRoleList = [];
+  const win = mmr === "all" ? WIN_TIERS : WIN_TIERS[mmr];
+  const pick = mmr === "all" ? PICK_TIERS : PICK_TIERS[mmr];
   console.log('getting meta');
-  const byRoleList = await getByRole(role);
+  if (role !== "all") {
+    byRoleList = await getByRole(role);
+  } else {
+    byRoleList = apiData;
+  }
   for (const hero of byRoleList) {
     const winrate = totalAmongTiers(hero, win) / totalAmongTiers(hero, pick) * 100;
-    byWinrate[hero.localized_name] = winrate.toFixed(2);
+    byWinRate[hero.localized_name] = winrate.toFixed(2);
   }
-  return Object.entries(byWinrate)
+  return Object.entries(byWinRate)
       .sort((a, b) => b[1] - a[1])
       .slice(0, numberTop);
 }
@@ -102,7 +108,7 @@ async function fetchHeroData(role, mmr) {
 }
 
 
-async function populateHeroCards(role, mmr) {
+async function populateHeroCards(role='all', mmr='all') {
   const heroes = await fetchHeroData(role, mmr);
   const heroCardsDiv = document.getElementById('heroCards');
 
@@ -152,5 +158,5 @@ async function updateMmr() {
 
 (async () => {
   await getHeroStats();
-  await populateHeroCards('Carry');
+  await populateHeroCards();
 })();
