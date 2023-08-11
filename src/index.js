@@ -9,15 +9,17 @@ const PICK_TIERS = [
   '1_pick', '2_pick', '3_pick', '4_pick', '5_pick', '6_pick', '7_pick', '8_pick',
 ];
 
+const ALL_ROLES = ['Support', 'Escape', 'Nuker', 'Pusher', 'Initiator', 'Durable', 'Carry', 'Disabler']
+
 const MMRMAPPING = {
-  herald: 0,
-  guardian: 1,
-  crusaders: 2,
-  archon: 3,
-  legend: 4,
-  ancient: 5,
-  divine: 6,
-  immortal: 7,
+  Herald: 0,
+  Guardian: 1,
+  Crusader: 2,
+  Archon: 3,
+  Legend: 4,
+  Ancient: 5,
+  Divine: 6,
+  Immortal: 7,
 }
 
 function toggleTheme() {
@@ -33,6 +35,18 @@ const dropdowns = document.querySelectorAll(".dropdown");
 dropdowns.forEach(dropdown => {
   const selectedOption = dropdown.querySelector(".selected-option");
   const list = dropdown.querySelector("ul");
+  const listItems = list.querySelectorAll("li"); // get all list items
+
+  // Add event listener to each list item
+  listItems.forEach(item => {
+    item.addEventListener("click", function() {
+      selectedOption.textContent = this.textContent; // update the selected option's content
+      
+      // Close the dropdown after an option is selected
+      dropdown.classList.remove("open");
+      list.classList.add("hidden");
+    });
+  });
   
   selectedOption.addEventListener("click", function() {
     // Close other dropdowns
@@ -74,6 +88,7 @@ async function getByRole(role) {
   const heroStats = apiData;
   console.log('HeroStats', heroStats);
   for (const hero of heroStats) {
+    console.log('hero', hero);
     if (hero.roles.includes(role)) {
       byRoleList.push(hero);
     }
@@ -170,7 +185,10 @@ async function populateHeroCards(role='All', mmr='All') {
 document.getElementById('roleDropdown').querySelectorAll('li').forEach(item => {
   item.addEventListener('click', async function() {
     const role = this.textContent;
-    const mmr = getCurrentlySelectedMmr();
+    const mmrTierName = getCurrentlySelectedMmr();
+    const mmr = MMRMAPPING[mmrTierName];
+    console.log("ROLE IS ", role);
+    console.log('MMR IS WHILE UPDATING ROLE ', mmr);
     await populateHeroCards(role, mmr);
     // Close dropdown
     document.getElementById('roleDropdown').classList.remove('open');
@@ -180,9 +198,12 @@ document.getElementById('roleDropdown').querySelectorAll('li').forEach(item => {
 // Handling MMR Selection
 document.getElementById('mmrDropdown').querySelectorAll('li').forEach(item => {
   item.addEventListener('click', async function() {
-    const mmrValue = this.textContent.toLowerCase();
+    const mmrTierName = this.textContent;
+    console.log('mmrValue_', mmrTierName);
     const role = getCurrentlySelectedRole(); // Function to determine the currently selected role
-    const mmr = MMRMAPPING[mmrValue];
+    const mmr = MMRMAPPING[mmrTierName];
+    console.log("ROLE IS WHILE UPDATING MMR", role);
+    console.log('MMR IS ', mmr);
     await populateHeroCards(role, mmr);
     // Close dropdown
     document.getElementById('mmrDropdown').classList.remove('open');
