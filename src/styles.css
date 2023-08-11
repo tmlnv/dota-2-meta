@@ -1,3 +1,7 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 :root {
   --light-bg: #fafafa;
   --light-text: #333;
@@ -17,6 +21,7 @@ body {
 }
 
 body[data-theme="dark"] {
+  background-color: var(--dark-bg);
   --bg: var(--dark-bg);
   --text: var(--dark-text);
   --card-bg: var(--dark-card-bg);
@@ -39,6 +44,7 @@ body[data-theme="dark"] {
   font-size: 30px;
   color: var(--text);
   text-transform: uppercase;
+  letter-spacing: 5px;
 }
 
 .hero-selector {
@@ -63,12 +69,15 @@ body[data-theme="dark"] {
 }
 
 .heroCard {
-  display: grid;
-  grid-template-columns: 100px auto 100px;
+  display: flex;
+  /* grid-template-columns: 100px auto 100px; */
   align-items: center;
   padding: 20px;
   border-radius: 10px;
+  border: 3px solid;
+  border-color: var(--text);
   background-color: var(--card-bg);
+  color: var(--text);
   position: relative;
   transition: all 0.3s ease;
 }
@@ -77,18 +86,22 @@ body[data-theme="dark"] {
   width: 100px;
   height: 100px;
   border-radius: 10px;
-  border: 2px solid var(--text);
+  border: 2px solid;
+  border-color: var(--text);
   object-fit: cover;
+  margin-left: auto;
 }
 
 .heroCard h2 {
   font-size: 20px;
-  margin: 0;
-  text-align: center;
+  margin: 10px;
+  margin-right: 10%;
+  text-align: justify;
+  min-width: max-content;
 }
 
 .heroCard p {
-  margin: 0;
+  margin-left: 10%;
   font-weight: bold;
   text-align: right;
 }
@@ -140,9 +153,22 @@ footer {
 
 /* Small screens (phones) */
 @media (max-width: 600px) {
+  .title {
+    margin: 5px;
+  }
+
   .heroCard {
     grid-template-columns: 1fr;
     text-align: center;
+  }
+
+  .heroCard h2 {
+    text-align: center;
+  }
+
+  .heroCard img {
+    margin-left: 10%;
+    align-content: center;
   }
 }
 
