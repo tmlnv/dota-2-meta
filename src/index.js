@@ -28,6 +28,37 @@ function toggleTheme() {
 
 document.getElementById('colorThemeToggleButton').addEventListener('click', toggleTheme);
 
+const dropdowns = document.querySelectorAll(".dropdown");
+
+dropdowns.forEach(dropdown => {
+  const selectedOption = dropdown.querySelector(".selected-option");
+  const list = dropdown.querySelector("ul");
+  
+  selectedOption.addEventListener("click", function() {
+    // Close other dropdowns
+    dropdowns.forEach(d => {
+      if (d !== dropdown) {
+        d.classList.remove("open");
+        d.querySelector("ul").classList.add("hidden"); // hide the list of other dropdowns
+      }
+    });
+    
+    // Toggle the clicked dropdown
+    dropdown.classList.toggle("open");
+    list.classList.toggle("hidden"); // toggle the hidden class
+  });
+});
+
+// Close the dropdown when clicked outside of it
+window.addEventListener("click", function(event) {
+  if (!event.target.matches(".selected-option")) {
+    dropdowns.forEach(dropdown => {
+      dropdown.classList.remove("open");
+      dropdown.querySelector("ul").classList.add("hidden"); // hide the list
+    });
+  }
+});
+
 let apiData = {};
 
 async function getHeroStats() {
@@ -64,10 +95,11 @@ function totalAmongTiers(hero, tiers) {
 async function getMeta(numberTop, role, mmr) {
   let byWinRate = {};
   let byRoleList = [];
-  const win = mmr === "all" ? WIN_TIERS : WIN_TIERS[mmr];
-  const pick = mmr === "all" ? PICK_TIERS : PICK_TIERS[mmr];
+  console.log('MMR IS ', mmr)
+  const win = mmr === "All" ? WIN_TIERS : WIN_TIERS[mmr];
+  const pick = mmr === "All" ? PICK_TIERS : PICK_TIERS[mmr];
   console.log('getting meta');
-  if (role !== "all") {
+  if (role !== "All") {
     byRoleList = await getByRole(role);
   } else {
     byRoleList = apiData;
@@ -108,7 +140,7 @@ async function fetchHeroData(role, mmr) {
 }
 
 
-async function populateHeroCards(role='all', mmr='all') {
+async function populateHeroCards(role='All', mmr='All') {
   const heroes = await fetchHeroData(role, mmr);
   const heroCardsDiv = document.getElementById('heroCards');
 
@@ -134,25 +166,39 @@ async function populateHeroCards(role='all', mmr='all') {
   }
 }
 
-document.getElementById('roleSelector').addEventListener('change', async () => {
-  await updateRole();
+// Handling Role Selection
+document.getElementById('roleDropdown').querySelectorAll('li').forEach(item => {
+  item.addEventListener('click', async function() {
+    const role = this.textContent;
+    const mmr = getCurrentlySelectedMmr();
+    await populateHeroCards(role, mmr);
+    // Close dropdown
+    document.getElementById('roleDropdown').classList.remove('open');
+  });
 });
 
-async function updateRole() {
-  const role = document.getElementById('roleSelector').value;
-  console.log('Updating role to', role);
-  await populateHeroCards(role);
+// Handling MMR Selection
+document.getElementById('mmrDropdown').querySelectorAll('li').forEach(item => {
+  item.addEventListener('click', async function() {
+    const mmrValue = this.textContent.toLowerCase();
+    const role = getCurrentlySelectedRole(); // Function to determine the currently selected role
+    const mmr = MMRMAPPING[mmrValue];
+    await populateHeroCards(role, mmr);
+    // Close dropdown
+    document.getElementById('mmrDropdown').classList.remove('open');
+  });
+});
+
+// Function to determine the currently selected role
+function getCurrentlySelectedRole() {
+  const roleDropdown = document.getElementById('roleDropdown');
+  return roleDropdown.querySelector(".selected-option").textContent;
 }
 
-document.getElementById('mmrSelector').addEventListener('change', async () => {
-  await updateMmr();
-});
-
-async function updateMmr() {
-  const role = document.getElementById('roleSelector').value;
-  const mmr = MMRMAPPING[document.getElementById('mmrSelector').value];
-  console.log('Updating mmr to', mmr);
-  await populateHeroCards(role, mmr);
+// Function to determine the currently selected mmr
+function getCurrentlySelectedMmr() {
+  const roleDropdown = document.getElementById('mmrDropdown');
+  return roleDropdown.querySelector(".selected-option").textContent;
 }
 
 
