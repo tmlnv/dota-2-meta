@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Dota 2 Meta</title>
-  <!-- <link rel="icon" type="image/x-icon" href="https://icons.iconarchive.com/icons/papirus-team/papirus-apps/16/dota-2-icon.png" width="16" height="16"> -->
   <link rel="icon" type="image/x-icon" href="images/icon.png" width="16" height="16">
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,27 +15,33 @@
     <header class="page-header">
       <h1 class="title">Dota 2 Meta</h1>
       <div class="hero-selector">
-        <select id="roleSelector" class="custom-select">
-          <option selected value="all">All</option>
-          <option value="Carry">Carry</option>
-          <option value="Nuker">Nuker</option>
-          <option value="Support">Support</option>
-          <option value="Pusher">Pusher</option>
-          <option value="Initiator">Initiator</option>
-          <option value="Durable">Durable</option>
-          <option value="Disabler">Disabler</option>
-        </select>
-        <select id="mmrSelector" class="custom-select">
-          <option selected value="all">All</option>
-          <option value="herald">Herald</option>
-          <option value="guardian">Guardian</option>
-          <option value="crusader">Crusader</option>
-          <option value="archon">Archon</option>
-          <option value="legend">Legend</option>
-          <option value="ancient">Ancient</option>
-          <option value="divine">Divine</option>
-          <option value="immortal">Immortal</option>
-        </select>
+        <div id="roleDropdown" class="dropdown">
+          <div class="selected-option">All</div>
+            <ul class="options-list hidden">
+              <li data-value="All">All</li>
+              <li data-value="Carry">Carry</li>
+              <li data-value="Nuker">Nuker</li>
+              <li data-value="Support">Support</li>
+              <li data-value="Pusher">Pusher</li>
+              <li data-value="Initiator">Initiator</li>
+              <li data-value="Durable">Durable</li>
+              <li data-value="Disabler">Disabler</li>
+            </ul>
+        </div>
+        <div id="mmrDropdown" class="dropdown">
+          <div class="selected-option">All</div>
+            <ul class="options-list hidden">
+              <li data-value="All">All</li>
+              <li value="herald">Herald</li>
+              <li value="guardian">Guardian</li>
+              <li value="crusader">Crusader</li>
+              <li value="archon">Archon</li>
+              <li value="legend">Legend</li>
+              <li value="ancient">Ancient</li>
+              <li value="divine">Divine</li>
+              <li value="immortal">Immortal</li>
+            </ul>
+        </div>
       </div>
     </header>
     <main id="heroCards" class="hero-cards"></main>
