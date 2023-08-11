@@ -1,178 +1,211 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Nunito', sans-serif;
-  overflow: auto;
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-* {
-  color: var(--text-color);
+:root {
+  --light-bg: #fafafa;
+  --light-text: #333;
+  --light-card-bg: #f0f0f0;
+  --dark-bg: #222;
+  --dark-text: #f0f0f0;
+  --dark-card-bg: #333;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--light-bg);
+  color: var(--light-text);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+body[data-theme="dark"] {
+  background-color: var(--dark-bg);
+  --bg: var(--dark-bg);
+  --text: var(--dark-text);
+  --card-bg: var(--dark-card-bg);
 }
 
 .app {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  align-items: start;
-  min-height: 100vh;
-  background: var(--bg-gradient);
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .page-header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  position: fixed;
-  top: 0;
-  background-color: var(--card-bg);
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  z-index: 1;
-  position: sticky;
-  top: 0;
-  font-size: 1.5em;
+  flex-wrap: wrap;
 }
 
-
-h1 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+.title {
+  font-size: 30px;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 5px;
 }
 
 .hero-selector {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+  display: inline;
+  gap: 10px;
+}
+
+.hero-selector:before {
+  content: 'Role & MMR';
+  color: var(--text);
+  margin-right: 10px;
+}
+
+#mmrSelector {
+  margin-left: 10px;
 }
 
 .custom-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
   border: none;
   background-color: var(--card-bg);
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  color: var(--text);
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
 }
 
 .hero-cards {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 20px;
-  margin-top: 100px; /* Adjust this value as needed */
+  flex-direction: column;
+  gap: 20px;
 }
 
 .heroCard {
-  border-radius: 5px;
-  margin: 20px;
+  display: grid;
+  grid-template-columns: 30% auto auto;
+  align-items: center;
   padding: 20px;
-  background: var(--card-bg);
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  border: 3px solid;
+  border-color: var(--text);
+  background-color: var(--card-bg);
+  color: var(--text);
+  position: relative;
   transition: all 0.3s ease;
-  text-align: center;
-  width: 200px;
-}
-
-.heroCard:hover {
-  transform: scale(1.05);
-}
-
-.heroCard h2 {
-  margin-bottom: 15px;
 }
 
 .heroCard img {
-  width: 100%;
-  height: auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  border: 2px solid;
+  border-color: var(--text);
   object-fit: cover;
-  border-radius: 15px;
+}
+
+.heroCard h2 {
+  font-size: 20px;
+  margin: 10px;
+  text-align: justify;
+  min-width: max-content;
 }
 
 .heroCard p {
-  margin-top: 15px;
+  margin-left: 10%;
+  font-weight: bold;
+  text-align: right;
+}
+
+/* Rankings */
+.heroCard:before {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.heroCard:nth-child(1):before { content: 'Top 1'; background-color: gold; }
+.heroCard:nth-child(2):before { content: 'Top 2'; background-color: silver; }
+.heroCard:nth-child(3):before { content: 'Top 3'; background-color: #cd7f32; }
+
+.heroCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  bottom: 0;
-  background: var(--card-bg);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  position: sticky;
-  bottom: 0;
+  padding: 10px 0;
 }
 
 #colorThemeToggleButton {
-  border-radius: 5px;
-  border-color: var(--card-bg);
   padding: 10px;
-  background: var(--card-bg);
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  text-align: center;
-  width: 150px;
+  background-color: #ff5500;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 5px;
 }
 
 #githubLink {
+  color: var(--text);
   text-decoration: none;
-  color: var(--text-color);
+  transition: color 0.3s;
 }
 
 #githubLink:hover {
-  color: #ad518e;
+  color: #ff5500;
 }
 
-/* Dark Mode */
-body[data-theme="dark"] {
-  --bg-gradient: linear-gradient(90deg, rgba(24,170,10,1) 0%, rgba(0,0,0,1) 50%, rgba(194,3,3,1) 100%);
-  --card-bg: #333;
-  --text-color: #fff;
+/* Small screens (phones) */
+@media (max-width: 600px) {
+  .title {
+    margin: 5px;
 }
 
-/* Light Mode */
-body[data-theme="light"] {
-  --bg-gradient: linear-gradient(to right, #55095b, #70706a);
-  --card-bg: #f4f4f4;
-  --text-color: #333;
+.heroCard {
+    grid-template-columns: 1fr 1fr; /* split into 2 columns */
+    text-align: center;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .hero-selector {
-      flex-direction: column;
-  }
+.heroCard h2 {
+    grid-column: 1 / span 2; /* let the hero name take both columns */
+    text-align: center;
+}
 
-  .hero-cards {
-      margin-top: 0px;
-      width: 100%;
-  }
+.heroCard img {
+    margin-left: 0; /* reset margin */
+}
 
-  .heroCard {
-      width: 45%;
-      height: 45%;
-  }
-
-  footer {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  footer a {
+.heroCard p {
+    grid-column: 2; /* position winrate in the second column */
     text-align: right;
-    width: auto;
-    margin-left: 10px;
-  }
+    margin-left: 0; /* reset margin */
+    margin-right: 10%; /* give some right spacing */
+}
+}
+
+/* Medium screens (tablets) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .heroCard {
+    grid-template-columns: 30% 1fr 1fr; /* split into 3 columns */
+}
+
+.heroCard img {
+    width: 80px;
+    height: 80px;
+    margin-left: 0; /* reset margin */
+}
+
+.heroCard h2 {
+    text-align: left;
+}
+
+.heroCard p {
+    grid-column: 3; /* position winrate in the third column */
+    text-align: right;
+    margin-left: 0; /* reset margin */
+}
 }
