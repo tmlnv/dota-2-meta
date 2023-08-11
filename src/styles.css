@@ -52,6 +52,7 @@ body[data-theme="dark"] {
   color: var(--text);
   text-transform: uppercase;
   letter-spacing: 5px;
+  margin-bottom: 30px;
 }
 
 .hero-selector {
@@ -63,7 +64,8 @@ body[data-theme="dark"] {
   content: 'Role & MMR';
   color: var(--text);
   margin-right: 10px;
-  padding-top: 25px;
+  margin-bottom: auto;
+  margin-top: auto;
 }
 
 .dropdown {
@@ -229,6 +231,26 @@ footer {
   }
   .title {
     margin: 5px;
+  }
+
+  .hero-selector:before {
+    content: 'Role & MMR';
+    color: var(--text);
+    min-width: 100px;
+  }
+
+  .hero-selector {
+    grid-template-columns: 1fr 1fr; /* split into 2 columns */
+    gap: 10px;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .dropdown {
+    width: 100%;
+    align-self: right;
+    max-width: 300px; /* this ensures it doesn't get too wide on landscape phones or larger screens within this media query range */
+    
   }
 
   .heroCard {
