@@ -69,8 +69,8 @@ body[data-theme="dark"] {
 }
 
 .heroCard {
-  display: flex;
-  /* grid-template-columns: 100px auto 100px; */
+  display: grid;
+  grid-template-columns: 30% auto auto;
   align-items: center;
   padding: 20px;
   border-radius: 10px;
@@ -89,13 +89,11 @@ body[data-theme="dark"] {
   border: 2px solid;
   border-color: var(--text);
   object-fit: cover;
-  margin-left: auto;
 }
 
 .heroCard h2 {
   font-size: 20px;
   margin: 10px;
-  margin-right: 10%;
   text-align: justify;
   min-width: max-content;
 }
@@ -155,31 +153,49 @@ footer {
 @media (max-width: 600px) {
   .title {
     margin: 5px;
-  }
+}
 
-  .heroCard {
-    grid-template-columns: 1fr;
+.heroCard {
+    grid-template-columns: 1fr 1fr; /* split into 2 columns */
     text-align: center;
-  }
+}
 
-  .heroCard h2 {
+.heroCard h2 {
+    grid-column: 1 / span 2; /* let the hero name take both columns */
     text-align: center;
-  }
+}
 
-  .heroCard img {
-    margin-left: 10%;
-    align-content: center;
-  }
+.heroCard img {
+    margin-left: 0; /* reset margin */
+}
+
+.heroCard p {
+    grid-column: 2; /* position winrate in the second column */
+    text-align: right;
+    margin-left: 0; /* reset margin */
+    margin-right: 10%; /* give some right spacing */
+}
 }
 
 /* Medium screens (tablets) */
 @media (min-width: 601px) and (max-width: 1024px) {
   .heroCard {
-    grid-template-columns: 80px auto 80px;
-  }
+    grid-template-columns: 30% 1fr 1fr; /* split into 3 columns */
+}
 
-  .heroCard img {
+.heroCard img {
     width: 80px;
     height: 80px;
-  }
+    margin-left: 0; /* reset margin */
+}
+
+.heroCard h2 {
+    text-align: left;
+}
+
+.heroCard p {
+    grid-column: 3; /* position winrate in the third column */
+    text-align: right;
+    margin-left: 0; /* reset margin */
+}
 }
