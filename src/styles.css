@@ -48,8 +48,18 @@ body[data-theme="dark"] {
 }
 
 .hero-selector {
-  display: flex;
+  display: inline;
   gap: 10px;
+}
+
+.hero-selector:before {
+  content: 'Role & MMR';
+  color: var(--text);
+  margin-right: 10px;
+}
+
+#mmrSelector {
+  margin-left: 10px;
 }
 
 .custom-select {
