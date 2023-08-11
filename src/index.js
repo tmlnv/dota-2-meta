@@ -9,15 +9,17 @@ const PICK_TIERS = [
   '1_pick', '2_pick', '3_pick', '4_pick', '5_pick', '6_pick', '7_pick', '8_pick',
 ];
 
+const ALL_ROLES = ['Support', 'Escape', 'Nuker', 'Pusher', 'Initiator', 'Durable', 'Carry', 'Disabler']
+
 const MMRMAPPING = {
-  herald: 0,
-  guardian: 1,
-  crusaders: 2,
-  archon: 3,
-  legend: 4,
-  ancient: 5,
-  divine: 6,
-  immortal: 7,
+  Herald: 0,
+  Guardian: 1,
+  Crusader: 2,
+  Archon: 3,
+  Legend: 4,
+  Ancient: 5,
+  Divine: 6,
+  Immortal: 7,
 }
 
 function toggleTheme() {
@@ -27,6 +29,49 @@ function toggleTheme() {
 }
 
 document.getElementById('colorThemeToggleButton').addEventListener('click', toggleTheme);
+
+const dropdowns = document.querySelectorAll(".dropdown");
+
+dropdowns.forEach(dropdown => {
+  const selectedOption = dropdown.querySelector(".selected-option");
+  const list = dropdown.querySelector("ul");
+  const listItems = list.querySelectorAll("li"); // get all list items
+
+  // Add event listener to each list item
+  listItems.forEach(item => {
+    item.addEventListener("click", function() {
+      selectedOption.textContent = this.textContent; // update the selected option's content
+      
+      // Close the dropdown after an option is selected
+      dropdown.classList.remove("open");
+      list.classList.add("hidden");
+    });
+  });
+  
+  selectedOption.addEventListener("click", function() {
+    // Close other dropdowns
+    dropdowns.forEach(d => {
+      if (d !== dropdown) {
+        d.classList.remove("open");
+        d.querySelector("ul").classList.add("hidden"); // hide the list of other dropdowns
+      }
+    });
+    
+    // Toggle the clicked dropdown
+    dropdown.classList.toggle("open");
+    list.classList.toggle("hidden"); // toggle the hidden class
+  });
+});
+
+// Close the dropdown when clicked outside of it
+window.addEventListener("click", function(event) {
+  if (!event.target.matches(".selected-option")) {
+    dropdowns.forEach(dropdown => {
+      dropdown.classList.remove("open");
+      dropdown.querySelector("ul").classList.add("hidden"); // hide the list
+    });
+  }
+});
 
 let apiData = {};
 
@@ -43,6 +88,7 @@ async function getByRole(role) {
   const heroStats = apiData;
   console.log('HeroStats', heroStats);
   for (const hero of heroStats) {
+    console.log('hero', hero);
     if (hero.roles.includes(role)) {
       byRoleList.push(hero);
     }
@@ -64,10 +110,11 @@ function totalAmongTiers(hero, tiers) {
 async function getMeta(numberTop, role, mmr) {
   let byWinRate = {};
   let byRoleList = [];
-  const win = mmr === "all" ? WIN_TIERS : WIN_TIERS[mmr];
-  const pick = mmr === "all" ? PICK_TIERS : PICK_TIERS[mmr];
+  console.log('MMR IS ', mmr)
+  const win = mmr === "All" ? WIN_TIERS : WIN_TIERS[mmr];
+  const pick = mmr === "All" ? PICK_TIERS : PICK_TIERS[mmr];
   console.log('getting meta');
-  if (role !== "all") {
+  if (role !== "All") {
     byRoleList = await getByRole(role);
   } else {
     byRoleList = apiData;
@@ -108,7 +155,7 @@ async function fetchHeroData(role, mmr) {
 }
 
 
-async function populateHeroCards(role='all', mmr='all') {
+async function populateHeroCards(role='All', mmr='All') {
   const heroes = await fetchHeroData(role, mmr);
   const heroCardsDiv = document.getElementById('heroCards');
 
@@ -134,25 +181,45 @@ async function populateHeroCards(role='all', mmr='all') {
   }
 }
 
-document.getElementById('roleSelector').addEventListener('change', async () => {
-  await updateRole();
+// Handling Role Selection
+document.getElementById('roleDropdown').querySelectorAll('li').forEach(item => {
+  item.addEventListener('click', async function() {
+    const role = this.textContent;
+    const mmrTierName = getCurrentlySelectedMmr();
+    const mmr = MMRMAPPING[mmrTierName];
+    console.log("ROLE IS ", role);
+    console.log('MMR IS WHILE UPDATING ROLE ', mmr);
+    await populateHeroCards(role, mmr);
+    // Close dropdown
+    document.getElementById('roleDropdown').classList.remove('open');
+  });
 });
 
-async function updateRole() {
-  const role = document.getElementById('roleSelector').value;
-  console.log('Updating role to', role);
-  await populateHeroCards(role);
+// Handling MMR Selection
+document.getElementById('mmrDropdown').querySelectorAll('li').forEach(item => {
+  item.addEventListener('click', async function() {
+    const mmrTierName = this.textContent;
+    console.log('mmrValue_', mmrTierName);
+    const role = getCurrentlySelectedRole(); // Function to determine the currently selected role
+    const mmr = MMRMAPPING[mmrTierName];
+    console.log("ROLE IS WHILE UPDATING MMR", role);
+    console.log('MMR IS ', mmr);
+    await populateHeroCards(role, mmr);
+    // Close dropdown
+    document.getElementById('mmrDropdown').classList.remove('open');
+  });
+});
+
+// Function to determine the currently selected role
+function getCurrentlySelectedRole() {
+  const roleDropdown = document.getElementById('roleDropdown');
+  return roleDropdown.querySelector(".selected-option").textContent;
 }
 
-document.getElementById('mmrSelector').addEventListener('change', async () => {
-  await updateMmr();
-});
-
-async function updateMmr() {
-  const role = document.getElementById('roleSelector').value;
-  const mmr = MMRMAPPING[document.getElementById('mmrSelector').value];
-  console.log('Updating mmr to', mmr);
-  await populateHeroCards(role, mmr);
+// Function to determine the currently selected mmr
+function getCurrentlySelectedMmr() {
+  const roleDropdown = document.getElementById('mmrDropdown');
+  return roleDropdown.querySelector(".selected-option").textContent;
 }
 
 
