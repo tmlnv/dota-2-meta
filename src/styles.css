@@ -9,6 +9,7 @@
   --dark-bg: #222;
   --dark-text: #f0f0f0;
   --dark-card-bg: #333;
+  --card-bg: var(--light-card-bg);
 }
 
 body, html {
@@ -72,6 +73,7 @@ body[data-theme="dark"] {
   position: relative;
   width: 200px;
   color: var(--text);
+  margin-bottom: 10px;
 }
 
 .selected-option {
@@ -99,7 +101,7 @@ ul {
   border-top: none; /* Remove top border */
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.1s ease-in;
+  transition: max-height 0.1s ease-in-out;
   overflow-y: auto;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -144,7 +146,6 @@ li:hover {
 .dropdown.open ul {
   max-height: 200px;
 }
-
 
 
 .hero-cards {
@@ -230,6 +231,11 @@ footer {
   transition: color 0.3s;
 }
 
+.github-logo {
+  vertical-align: middle;
+  fill: currentColor; /* this will make the SVG color adapt to the color of its parent, i.e., the anchor tag. */
+}
+
 #githubLink:hover {
   color: #ff5500;
 }
@@ -260,6 +266,7 @@ footer {
     width: 100%;
     align-self: right;
     max-width: 300px; /* this ensures it doesn't get too wide on landscape phones or larger screens within this media query range */
+    min-width: 25vw;
     
   }
 
