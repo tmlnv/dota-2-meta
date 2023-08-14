@@ -77,9 +77,11 @@ body[data-theme="dark"] {
 .selected-option {
   padding: 10px;
   border: 2px solid;
-  border-color: (--text);
+  border-color: var(--text);
   cursor: pointer;
   border-radius: 10px;
+  background-color: var(--card-bg); /* Set background color to match the card's background */
+  background-clip: padding-box; /* Ensures background doesn't extend under the border */
 }
 
 ul.hidden {
@@ -90,7 +92,6 @@ ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  margin-bottom: 10px;
   border-bottom: 2px solid;
   border-left: 2px solid;
   border-right: 2px solid;
@@ -98,10 +99,19 @@ ul {
   border-top: none; /* Remove top border */
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
+  transition: max-height 0.1s ease-in;
   overflow-y: auto;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+
+  position: absolute;
+  width: 100%;
+  z-index: 10; /* This will ensure the dropdown appears above other elements */
+  top: 100%; /* Positioning it right below the .selected-option element */
+
+  background-color: var(--card-bg);
+  margin-top: -2px; /* Overlap the ul border over the .selected-option bottom border */
+  background-clip: padding-box; /* Ensures background doesn't extend under the border */
 }
 
 .dropdown.open ul {
