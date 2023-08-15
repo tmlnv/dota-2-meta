@@ -9,6 +9,7 @@
   --dark-bg: #222;
   --dark-text: #f0f0f0;
   --dark-card-bg: #333;
+  --card-bg: var(--light-card-bg);
 }
 
 body, html {
@@ -72,14 +73,17 @@ body[data-theme="dark"] {
   position: relative;
   width: 200px;
   color: var(--text);
+  margin-bottom: 10px;
 }
 
 .selected-option {
   padding: 10px;
   border: 2px solid;
-  border-color: (--text);
+  border-color: var(--text);
   cursor: pointer;
   border-radius: 10px;
+  background-color: var(--card-bg); /* Set background color to match the card's background */
+  background-clip: padding-box; /* Ensures background doesn't extend under the border */
 }
 
 ul.hidden {
@@ -90,7 +94,6 @@ ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  margin-bottom: 10px;
   border-bottom: 2px solid;
   border-left: 2px solid;
   border-right: 2px solid;
@@ -98,10 +101,19 @@ ul {
   border-top: none; /* Remove top border */
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
+  transition: max-height 0.1s ease-in-out;
   overflow-y: auto;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+
+  position: absolute;
+  width: 100%;
+  z-index: 10; /* This will ensure the dropdown appears above other elements */
+  top: 100%; /* Positioning it right below the .selected-option element */
+
+  background-color: var(--card-bg);
+  margin-top: -2px; /* Overlap the ul border over the .selected-option bottom border */
+  background-clip: padding-box; /* Ensures background doesn't extend under the border */
 }
 
 .dropdown.open ul {
@@ -134,7 +146,6 @@ li:hover {
 .dropdown.open ul {
   max-height: 200px;
 }
-
 
 
 .hero-cards {
@@ -220,6 +231,11 @@ footer {
   transition: color 0.3s;
 }
 
+.github-logo {
+  vertical-align: middle;
+  fill: currentColor; /* this will make the SVG color adapt to the color of its parent, i.e., the anchor tag. */
+}
+
 #githubLink:hover {
   color: #ff5500;
 }
@@ -250,6 +266,7 @@ footer {
     width: 100%;
     align-self: right;
     max-width: 300px; /* this ensures it doesn't get too wide on landscape phones or larger screens within this media query range */
+    min-width: 25vw;
     
   }
 
