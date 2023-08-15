@@ -15,6 +15,7 @@
     "webpack-dev-server": "^4.15.1"
   },
   "scripts": {
+    "build": "echo 'Building webpack dist folder' && rm -rf dist && npx webpack build",
     "start": "webpack serve --open"
   },
   "name": "dota_2_meta_js",
