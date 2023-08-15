@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/tmlnv/dota-2-meta#readme",
   "dependencies": {
+    "@vercel/analytics": "^1.0.2",
     "dotenv": "^16.3.1",
     "node-fetch": "^3.3.2"
   },

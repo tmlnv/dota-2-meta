@@ -1,4 +1,7 @@
 import './styles.css';
+import { inject } from '@vercel/analytics';
+ 
+inject();
 
 const OPEN_DOTA_API_URL = 'https://api.opendota.com/';
 
