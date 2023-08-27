@@ -3,7 +3,7 @@ import { inject } from '@vercel/analytics';
  
 inject();
 
-const OPEN_DOTA_API_URL = 'https://api.opendota.com/';
+const OPEN_DOTA_API_URL = 'https://api.opendota.com';
 
 const WIN_TIERS = [
   '1_win', '2_win', '3_win', '4_win', '5_win', '6_win', '7_win', '8_win',
@@ -76,11 +76,11 @@ window.addEventListener("click", function(event) {
   }
 });
 
-let apiData = {};
+let apiData = [];
 
 async function getHeroStats() {
   console.log('fetching api response');
-  const response = await fetch(`${OPEN_DOTA_API_URL}api/heroStats`);
+  const response = await fetch(`${OPEN_DOTA_API_URL}/api/heroStats`);
   apiData = await response.json();
 }
 
@@ -131,10 +131,17 @@ async function getMeta(numberTop, role, mmr) {
       .slice(0, numberTop);
 }
 
-async function getHeroImg(heroName) {
-  const formattedHeroName = heroName.replace(/[\s\W]+/g, '_').toLowerCase();
+const getAllHeroImgs = () => {
+  return apiData.reduce((accumulator, hero) => {
+    accumulator[hero.localized_name] = hero.img;
+    return accumulator;
+  }, {});
+}
 
-  return `http://api.opendota.com/apps/dota2/images/heroes/${formattedHeroName}_full.png`;
+
+async function getHeroImg(heroName) {
+  const allHeroImgs = getAllHeroImgs();
+  return `${OPEN_DOTA_API_URL}${allHeroImgs[heroName]}`;
 }
 
 async function fetchHeroData(role, mmr) {
