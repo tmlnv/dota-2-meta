@@ -45,6 +45,11 @@ const Cards: React.FC = () => {
     const [selectedRole, setSelectedRole] = useState<string>('All');
     const [selectedMmr, setSelectedMmr] = useState<'All' | number>('All');
 
+    const filterHeroes = () => {
+        const topHeroes = getMeta(5, selectedRole, selectedMmr);
+        setHeroes(topHeroes);
+    }
+
     function getByRole(role: string): Hero[] {
         const byRoleList: Hero[] = [];
         console.log('getting by role');
@@ -60,9 +65,6 @@ const Cards: React.FC = () => {
     }
 
     function totalAmongTiers(hero: Hero, tiers: string[] | string): number {
-        console.log('TOTAL AMONG TIERS FUNCTION');
-        console.log(hero);
-    
         let tierKeys: string[] = [];
         if (typeof tiers === "string") {
             tierKeys = [tiers];
@@ -86,8 +88,8 @@ const Cards: React.FC = () => {
         let byWinRate: MetaHero[] = [];
         let byRoleList: Hero[] = [];
         console.log('MMR IS ', mmr)
-        const win = mmr === "All" ? WIN_TIERS : WIN_TIERS[mmr];
-        const pick = mmr === "All" ? PICK_TIERS : PICK_TIERS[mmr];
+        const win = mmr === "All" ? [].concat(...Object.values(WIN_TIERS)) : WIN_TIERS[mmr];
+        const pick = mmr === "All" ? [].concat(...Object.values(PICK_TIERS)) : PICK_TIERS[mmr];
         console.log('getting meta');
         if (role !== "All") {
             byRoleList = getByRole(role);
@@ -153,8 +155,16 @@ const Cards: React.FC = () => {
     
 
     useEffect(() => {
-        getHeroStats();
-    }, [selectedRole, selectedMmr]);
+        const fetchData = async () => {
+            await getHeroStats();  // Fetch data only once on component mount
+            filterHeroes();        // Filter heroes once data is fetched
+        }
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        filterHeroes();
+    }, [selectedRole, selectedMmr, apiData]);
 
     return (
         <>
@@ -162,7 +172,12 @@ const Cards: React.FC = () => {
                 <h1 className='title'>Dota 2 Meta</h1>
                 <div className='hero-selector'>
                     <DropDown id='roleDropdown' dataValue={roles} onValueChange={((newValue) => setSelectedRole(newValue))}/>
-                    <DropDown id='mmrDropdown' dataValue={mmrs} />
+                    <DropDown 
+                        id='mmrDropdown' 
+                        dataValue={Object.values(MMRMAPPING).filter(value => typeof value === 'string') as string[]}
+                        onValueChange={(newValue) => setSelectedMmr(MMRMAPPING[newValue])}
+                    />
+
                 </div>
             </header>
             <main id="heroCards" className="hero-cards">
