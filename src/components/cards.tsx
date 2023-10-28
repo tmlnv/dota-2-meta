@@ -1,11 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import HeroCard from './HeroCard';
-import { OPEN_DOTA_API_URL, WIN_TIERS, PICK_TIERS, ALL_ROLES, MMRMAPPING } from './config';
+import HeroCard from './heroCard';
+import { OPEN_DOTA_API_URL, WIN_TIERS, PICK_TIERS, MMRMAPPING } from './config';
 import DropDown from './dropDown';
 
 const roles = ["All", "Carry", "Nuker", "Support", "Pusher", "Initiator", "Durable", "Disabler"]
-const mmrs = ["All", "Herald", "Guardian", "Crusader", "Archon", "Legend", "Ancient", "Divine", "Immortal"]
 
 interface Hero {
     localized_name: string;
@@ -88,8 +87,8 @@ const Cards: React.FC = () => {
         let byWinRate: MetaHero[] = [];
         let byRoleList: Hero[] = [];
         console.log('MMR IS ', mmr)
-        const win = mmr === "All" ? [].concat(...Object.values(WIN_TIERS)) : WIN_TIERS[mmr];
-        const pick = mmr === "All" ? [].concat(...Object.values(PICK_TIERS)) : PICK_TIERS[mmr];
+        const win = mmr === "All" ? WIN_TIERS : WIN_TIERS[mmr];
+        const pick = mmr === "All" ? PICK_TIERS : PICK_TIERS[mmr];
         console.log('getting meta');
         if (role !== "All") {
             byRoleList = getByRole(role);
@@ -143,11 +142,6 @@ const Cards: React.FC = () => {
 
             setApiData(neededInfo)
             console.log(apiData)
-
-            const topHeroes = getMeta(5, selectedRole, selectedMmr)
-
-            setHeroes(topHeroes)
-            console.log(neededInfo);
         } catch (error) {
             console.error('Error fetching hero stats:', error);
         }
@@ -174,7 +168,7 @@ const Cards: React.FC = () => {
                     <DropDown id='roleDropdown' dataValue={roles} onValueChange={((newValue) => setSelectedRole(newValue))}/>
                     <DropDown 
                         id='mmrDropdown' 
-                        dataValue={Object.values(MMRMAPPING).filter(value => typeof value === 'string') as string[]}
+                        dataValue={Object.keys(MMRMAPPING)}
                         onValueChange={(newValue) => setSelectedMmr(MMRMAPPING[newValue])}
                     />
 

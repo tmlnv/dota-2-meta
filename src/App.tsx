@@ -1,12 +1,8 @@
-import { useState } from 'react'
-import DropDown from './components/dropDown'
 import ColorThemeToggleButton from './components/colorThemeButton'
 import Cards from './components/cards'
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <Cards />
