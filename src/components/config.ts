@@ -9,7 +9,11 @@ const PICK_TIERS = [
 
 const ALL_ROLES = ['Support', 'Escape', 'Nuker', 'Pusher', 'Initiator', 'Durable', 'Carry', 'Disabler']
 
-const MMRMAPPING = {
+type MmrMappingType = {
+  [key: string]: 'All' | number;
+};
+
+const MMRMAPPING: MmrMappingType = {
   All: "All",
   Herald: 0,
   Guardian: 1,
