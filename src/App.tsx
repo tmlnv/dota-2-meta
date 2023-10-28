@@ -4,7 +4,7 @@ import ColorThemeToggleButton from './components/colorThemeButton'
 import Cards from './components/cards'
 
 const roles = ["All", "Carry", "Nuker", "Support", "Pusher", "Initiator", "Durable", "Disabler"]
-const mmrs = ["All", "herald", "guardian", "crusader", "archon", "legend", "ancient", "divine", "immortal"]
+const mmrs = ["All", "Herald", "Guardian", "Crusader", "Archon", "Legend", "Ancient", "Divine", "Immortal"]
 
 
 function App() {
