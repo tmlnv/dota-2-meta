@@ -2,7 +2,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import HeroCard from './HeroCard';
 import { OPEN_DOTA_API_URL, WIN_TIERS, PICK_TIERS, ALL_ROLES, MMRMAPPING } from './config';
+import DropDown from './dropDown';
 
+const roles = ["All", "Carry", "Nuker", "Support", "Pusher", "Initiator", "Durable", "Disabler"]
+const mmrs = ["All", "Herald", "Guardian", "Crusader", "Archon", "Legend", "Ancient", "Divine", "Immortal"]
 
 interface Hero {
     localized_name: string;
@@ -154,11 +157,20 @@ const Cards: React.FC = () => {
     }, [selectedRole, selectedMmr]);
 
     return (
-        <main id="heroCards" className="hero-cards">
-            {heroes.map(({heroName, heroImg, heroWinRate}, index) => (
-            <HeroCard key={index} name={heroName} imgSrc={heroImg} winRate={heroWinRate}/>
-            ))}
-        </main>
+        <>
+            <header className='page-header'>
+                <h1 className='title'>Dota 2 Meta</h1>
+                <div className='hero-selector'>
+                    <DropDown id='roleDropdown' dataValue={roles} onValueChange={((newValue) => setSelectedRole(newValue))}/>
+                    <DropDown id='mmrDropdown' dataValue={mmrs} />
+                </div>
+            </header>
+            <main id="heroCards" className="hero-cards">
+                {heroes.map(({heroName, heroImg, heroWinRate}, index) => (
+                <HeroCard key={index} name={heroName} imgSrc={heroImg} winRate={heroWinRate}/>
+                ))}
+            </main>
+        </>
     );
 }
 

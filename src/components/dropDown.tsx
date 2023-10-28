@@ -3,11 +3,13 @@ import React, { useEffect, useRef, useState } from 'react';
 interface DropDownProps {
     id: string;
     dataValue: string[];
+    initialValue?: string;
+    onValueChange?: (newValue: string) => void;
 }
 
-const DropDown: React.FC<DropDownProps> = ({ id, dataValue }) => {
+const DropDown: React.FC<DropDownProps> = ({ id, dataValue, initialValue = 'All', onValueChange }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState('All');
+  const [selectedValue, setSelectedValue] = useState(initialValue);
   const dropdownRef = useRef(null);
 
   const handleOutsideClick = (event: MouseEvent) => {
@@ -23,6 +25,13 @@ const DropDown: React.FC<DropDownProps> = ({ id, dataValue }) => {
     };
   }, []);
 
+  const handleValueChange = (value: string) => {
+    setSelectedValue(value);
+    if (onValueChange) {
+      onValueChange(value);
+    }
+  };
+
   return (
     <div ref={dropdownRef} className={`dropdown ${isOpen ? 'open' : ''}`} id={id}>
       <div className="selected-option" onClick={() => setIsOpen(!isOpen)}>
@@ -34,7 +43,7 @@ const DropDown: React.FC<DropDownProps> = ({ id, dataValue }) => {
             key={index}
             data-value={value}
             onClick={() => {
-              setSelectedValue(value);
+              handleValueChange(value);
               setIsOpen(false);
             }}
           >

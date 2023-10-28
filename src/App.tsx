@@ -3,23 +3,13 @@ import DropDown from './components/dropDown'
 import ColorThemeToggleButton from './components/colorThemeButton'
 import Cards from './components/cards'
 
-const roles = ["All", "Carry", "Nuker", "Support", "Pusher", "Initiator", "Durable", "Disabler"]
-const mmrs = ["All", "Herald", "Guardian", "Crusader", "Archon", "Legend", "Ancient", "Divine", "Immortal"]
-
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-        <header className='page-header'>
-          <h1 className='title'>Dota 2 Meta</h1>
-          <div className='hero-selector'>
-            <DropDown id='roleDropdown' dataValue={roles} />
-            <DropDown id='mmrDropdown' dataValue={mmrs} />
-          </div>
-        </header>
-        <Cards />
+      <Cards />
         <footer>
           <ColorThemeToggleButton />
           <a id="githubLink" href="https://github.com/tmlnv/dota-2-meta" target="_blank" aria-label="View on GitHub">
