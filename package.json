@@ -1,40 +1,30 @@
 {
   "name": "dota-2-meta",
-  "description": "Dota 2 Meta: A dynamic, web-based visualization of the most impactful heroes by role and MMR.",
-  "version": "1.0.0",
-  "main": "webpack.config.js",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build": "echo 'Building webpack dist folder' && rm -rf dist && npx webpack build",
-    "test": "npx webpack serve"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
-  "keywords": [
-    "dota2",
-    "dota"
-  ],
-  "author": "tmlnv",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tmlnv/dota-2-meta.git"
-  },
-  "bugs": {
-    "url": "https://github.com/tmlnv/dota-2-meta/issues"
-  },
-  "homepage": "https://github.com/tmlnv/dota-2-meta#readme",
   "dependencies": {
-    "@vercel/analytics": "^1.0.2",
-    "dotenv": "^16.3.1",
-    "node-fetch": "^3.3.2"
+    "axios": "^1.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "css-loader": "^6.8.1",
-    "eslint": "^8.46.0",
-    "eslint-config-google": "^0.14.0",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.5.3",
-    "style-loader": "^3.3.3",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react-swc": "^3.3.2",
+    "eslint": "^8.52.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
   }
 }

@@ -35,7 +35,7 @@ body[data-theme="dark"] {
   --card-bg: var(--dark-card-bg);
 }
 
-.app {
+#root {
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
