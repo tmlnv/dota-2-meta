@@ -175,8 +175,8 @@ const Cards: React.FC = () => {
                 </div>
             </header>
             <main id="heroCards" className="hero-cards">
-                {heroes.map(({heroName, heroImg, heroWinRate}, index) => (
-                <HeroCard key={index} name={heroName} imgSrc={heroImg} winRate={heroWinRate}/>
+                {heroes.map(({heroName, heroImg, heroWinRate}) => (
+                <HeroCard key={heroName} name={heroName} imgSrc={heroImg} winRate={heroWinRate}/>
                 ))}
             </main>
         </>
