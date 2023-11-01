@@ -1,7 +1,6 @@
-import Cards from './components/cards'
-import ColorThemeToggleButton from './components/colorThemeButton'
-import GitHubButton from './components/gitHubButton'
-
+import Cards from "./components/cards";
+import ColorThemeToggleButton from "./components/colorThemeButton";
+import GitHubButton from "./components/gitHubButton";
 
 function App() {
   return (
@@ -12,7 +11,7 @@ function App() {
         <GitHubButton />
       </footer>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

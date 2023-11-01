@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -12,14 +14,14 @@
   --card-bg: var(--light-card-bg);
 }
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
 }
 
-
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   background-color: var(--light-bg);
   color: var(--light-text);
   margin: 0;
@@ -62,7 +64,7 @@ body[data-theme="dark"] {
 }
 
 .hero-selector:before {
-  content: 'Role & MMR';
+  content: "Role & MMR";
   color: var(--text);
   margin-right: 10px;
   margin-bottom: auto;
@@ -82,7 +84,9 @@ body[data-theme="dark"] {
   border-color: var(--text);
   cursor: pointer;
   border-radius: 10px;
-  background-color: var(--card-bg); /* Set background color to match the card's background */
+  background-color: var(
+    --card-bg
+  ); /* Set background color to match the card's background */
   background-clip: padding-box; /* Ensures background doesn't extend under the border */
 }
 
@@ -117,14 +121,14 @@ ul {
 }
 
 .dropdown.open ul {
-  max-height: 150px;  /* height to expand to */
-  border-bottom-left-radius: 10px;  /* straight bottom-left when opened */
+  max-height: 150px; /* height to expand to */
+  border-bottom-left-radius: 10px; /* straight bottom-left when opened */
   border-bottom-right-radius: 10px; /* straight bottom-right when opened */
 }
 
 .dropdown.open .selected-option {
   border-bottom: 0;
-  border-bottom-left-radius: 0;  /* straight bottom-left when opened */
+  border-bottom-left-radius: 0; /* straight bottom-left when opened */
   border-bottom-right-radius: 0; /* straight bottom-right when opened */
 }
 
@@ -146,7 +150,6 @@ li:hover {
 .dropdown.open ul {
   max-height: 200px;
 }
-
 
 .hero-cards {
   display: flex;
@@ -199,9 +202,21 @@ li:hover {
   border-radius: 5px;
 }
 
-.heroCard:nth-child(1):before { content: 'Top 1'; background-color: gold; margin-top:10px; }
-.heroCard:nth-child(2):before { content: 'Top 2'; background-color: silver; margin-top:10px; }
-.heroCard:nth-child(3):before { content: 'Top 3'; background-color: #cd7f32; margin-top:10px; }
+.heroCard:nth-child(1):before {
+  content: "Top 1";
+  background-color: gold;
+  margin-top: 10px;
+}
+.heroCard:nth-child(2):before {
+  content: "Top 2";
+  background-color: silver;
+  margin-top: 10px;
+}
+.heroCard:nth-child(3):before {
+  content: "Top 3";
+  background-color: #cd7f32;
+  margin-top: 10px;
+}
 
 .heroCard:hover {
   transform: scale(1.05);
@@ -250,7 +265,7 @@ footer {
   }
 
   .hero-selector:before {
-    content: 'Role & MMR';
+    content: "Role & MMR";
     color: var(--text);
     min-width: 100px;
   }
@@ -267,7 +282,6 @@ footer {
     align-self: right;
     max-width: 300px; /* this ensures it doesn't get too wide on landscape phones or larger screens within this media query range */
     min-width: 25vw;
-    
   }
 
   .heroCard {
@@ -290,6 +304,12 @@ footer {
     margin-left: 0; /* reset margin */
     margin-right: 10%; /* give some right spacing */
   }
+}
+
+.error {
+  color: #ff5500;
+  text-align: center;
+  font-size: 1.5rem;
 }
 
 /* Medium screens (tablets) */
