@@ -263,7 +263,7 @@ footer {
 }
 
 .loader {
-  margin-left: 50%;
+  margin: 0 auto;
   margin-top: 50px;
   margin-bottom: 50px;
   --dim: 3rem;
