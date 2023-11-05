@@ -28,6 +28,7 @@ body {
   padding: 0;
   line-height: 1.6;
   overflow-x: hidden;
+  --text: var(--light-text);
 }
 
 body[data-theme="dark"] {
@@ -171,13 +172,38 @@ li:hover {
   transition: all 0.3s ease;
 }
 
-.heroCard img {
+.heroCard .image-container {
+  position: relative; /* Continue to position relative for absolute positioning inside */
+  display: flex; /* Use flexbox to center children */
+  justify-content: center; /* Center children horizontally */
+  align-items: center; /* Center children vertically */
   width: 100px;
   height: 100px;
   border-radius: 10px;
   border: 2px solid;
   border-color: var(--text);
   object-fit: cover;
+  overflow: hidden;
+}
+
+.heroCard .image-container .loader {
+  position: absolute;
+  --dim: 2rem;
+  width: var(--dim);
+  height: var(--dim);
+}
+
+.heroCard .image-container .loader .circle {
+  --dim: 0.7rem;
+  width: var(--dim);
+  height: var(--dim);
+}
+
+.heroCard .image-container img {
+  object-fit: cover; /* This will cover the area, and won't stretch the image */
+  position: absolute; /* Take the image out of the document flow */
+  width: 100%;
+  height: 100%;
 }
 
 .heroCard h2 {
@@ -255,6 +281,79 @@ footer {
   color: #ff5500;
 }
 
+.error {
+  color: #ff5500;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.loader {
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  --dim: 3rem;
+  width: var(--dim);
+  height: var(--dim);
+  position: relative;
+  animation: spin988 2s linear infinite;
+}
+
+.loader .circle {
+  --color: var(--text);
+  --dim: 1.2rem;
+  width: var(--dim);
+  height: var(--dim);
+  background-color: var(--color);
+  border-radius: 50%;
+  position: absolute;
+}
+
+.loader .circle:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+
+.loader .circle:nth-child(2) {
+  top: 0;
+  right: 0;
+}
+
+.loader .circle:nth-child(3) {
+  bottom: 0;
+  left: 0;
+}
+
+.loader .circle:nth-child(4) {
+  bottom: 0;
+  right: 0;
+}
+
+@keyframes spin988 {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+
+  20%,
+  25% {
+    transform: scale(1.3) rotate(90deg);
+  }
+
+  45%,
+  50% {
+    transform: scale(1) rotate(180deg);
+  }
+
+  70%,
+  75% {
+    transform: scale(1.3) rotate(270deg);
+  }
+
+  95%,
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
 /* Small screens (phones) */
 @media (max-width: 600px) {
   .page-header {
@@ -304,12 +403,6 @@ footer {
     margin-left: 0; /* reset margin */
     margin-right: 10%; /* give some right spacing */
   }
-}
-
-.error {
-  color: #ff5500;
-  text-align: center;
-  font-size: 1.5rem;
 }
 
 /* Medium screens (tablets) */

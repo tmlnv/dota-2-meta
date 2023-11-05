@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { MMRMAPPING, OPEN_DOTA_API_URL, PICK_TIERS, WIN_TIERS } from "./config";
 import DropDown from "./dropDown";
 import HeroCard from "./heroCard";
+import Loading from "./loader";
 
 const roles = [
   "All",
@@ -44,6 +45,8 @@ type MetaHero = {
 };
 
 const Cards: React.FC = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const [apiData, setApiData] = useState<Hero[]>([]);
   const [heroes, setHeroes] = useState<MetaHero[]>([]);
 
@@ -129,6 +132,7 @@ const Cards: React.FC = () => {
 
   // Fetch hero stats using Axios
   const getHeroStats = async () => {
+    setIsLoading(true);
     setErrorApi(null);
     try {
       const response = await axios.get<Hero[]>(
@@ -158,6 +162,7 @@ const Cards: React.FC = () => {
 
       setApiData(neededInfo);
       console.log(apiData);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching hero stats:", error);
       if (typeof error === "string") {
@@ -165,6 +170,7 @@ const Cards: React.FC = () => {
       } else if (error instanceof Error) {
         setErrorApi(error.message);
       }
+      setIsLoading(false);
     }
   };
 
@@ -197,19 +203,25 @@ const Cards: React.FC = () => {
           />
         </div>
       </header>
-      {!errorApi && (
-        <main id="heroCards" className="hero-cards">
-          {heroes.map(({ heroName, heroImg, heroWinRate }) => (
-            <HeroCard
-              key={heroName}
-              name={heroName}
-              imgSrc={heroImg}
-              winRate={heroWinRate}
-            />
-          ))}
-        </main>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          {!errorApi && (
+            <main id="heroCards" className="hero-cards">
+              {heroes.map(({ heroName, heroImg, heroWinRate }) => (
+                <HeroCard
+                  key={heroName}
+                  name={heroName}
+                  imgSrc={heroImg}
+                  winRate={heroWinRate}
+                />
+              ))}
+            </main>
+          )}
+          {!!errorApi && <div className="error">{errorApi}</div>}
+        </>
       )}
-      {!!errorApi && <div className="error">{errorApi}</div>}
     </>
   );
 };

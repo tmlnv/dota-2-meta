@@ -1,3 +1,6 @@
+import React, { useState } from "react";
+import Loader from "./loader";
+
 interface HeroCardProps {
   name: string;
   imgSrc: string;
@@ -5,10 +8,20 @@ interface HeroCardProps {
 }
 
 const HeroCard: React.FC<HeroCardProps> = ({ name, imgSrc, winRate }) => {
+  const [isImgLoading, setIsImgLoading] = useState(true);
+
   return (
     <div className="heroCard">
       <h2>{name}</h2>
-      <img src={imgSrc} alt={`${name} thumbnail`} />
+      <div className="image-container">
+        {isImgLoading && <Loader />}
+        <img
+          src={imgSrc}
+          alt={`${name} thumbnail`}
+          style={{ display: isImgLoading ? "none" : "block" }}
+          onLoad={() => setIsImgLoading(false)}
+        />
+      </div>
       <p>Winrate: {winRate}%</p>
     </div>
   );
