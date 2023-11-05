@@ -172,13 +172,38 @@ li:hover {
   transition: all 0.3s ease;
 }
 
-.heroCard img {
+.heroCard .image-container {
+  position: relative; /* Continue to position relative for absolute positioning inside */
+  display: flex; /* Use flexbox to center children */
+  justify-content: center; /* Center children horizontally */
+  align-items: center; /* Center children vertically */
   width: 100px;
   height: 100px;
   border-radius: 10px;
   border: 2px solid;
   border-color: var(--text);
   object-fit: cover;
+  overflow: hidden;
+}
+
+.heroCard .image-container .loader {
+  position: absolute;
+  --dim: 2rem;
+  width: var(--dim);
+  height: var(--dim);
+}
+
+.heroCard .image-container .loader .circle {
+  --dim: 0.7rem;
+  width: var(--dim);
+  height: var(--dim);
+}
+
+.heroCard .image-container img {
+  object-fit: cover; /* This will cover the area, and won't stretch the image */
+  position: absolute; /* Take the image out of the document flow */
+  width: 100%;
+  height: 100%;
 }
 
 .heroCard h2 {
