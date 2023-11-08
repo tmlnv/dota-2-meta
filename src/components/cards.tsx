@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { MMRMAPPING, OPEN_DOTA_API_URL, PICK_TIERS, WIN_TIERS } from "./config";
-import DropDown from "./dropDown";
-import HeroCard from "./heroCard";
-import Loading from "./loader";
+import DropDown from "./DropDown";
+import HeroCard from "./HeroCard";
+import Loading from "./Loader";
 
 const roles = [
   "All",

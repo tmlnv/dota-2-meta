@@ -1,6 +1,6 @@
-import Cards from "./components/cards";
-import ColorThemeToggleButton from "./components/colorThemeButton";
-import GitHubButton from "./components/gitHubButton";
+import Cards from "./components/Cards";
+import ColorThemeToggleButton from "./components/ColorThemeButton";
+import GitHubButton from "./components/GitHubButton";
 
 function App() {
   return (
