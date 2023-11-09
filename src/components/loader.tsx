@@ -1,14 +1,20 @@
-import StyledLoader from "../styles/loader";
+import StyledLoaderDiv from "../styles/loader";
 
-const Loading: React.FC = () => (
-  <StyledLoader>
+interface LoaderProps {
+  $dim?: string;
+  $position?: string;
+  $circleDim?: string;
+}
+
+const Loading: React.FC<LoaderProps> = (props) => (
+  <StyledLoaderDiv {...props}>
     <div className="loader">
       <div className="circle"></div>
       <div className="circle"></div>
       <div className="circle"></div>
       <div className="circle"></div>
     </div>
-  </StyledLoader>
+  </StyledLoaderDiv>
 );
 
 export default Loading;

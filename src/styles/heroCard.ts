@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Loader from "../components/Loader";
 
 const StyledHeroCard = styled.div`
   display: grid;
@@ -83,17 +82,6 @@ const ImgContainer = styled.div`
   overflow: hidden;
 `;
 
-const StyledSmallLoader = styled(Loader)`
-  position: absolute;
-  --dim: 2rem;
-
-  & circle {
-    --dim: 0.7rem;
-    width: var(--dim);
-    height: var(--dim);
-  }
-`;
-
 const StyledImg = styled.img`
   object-fit: cover; /* This will cover the area, and won't stretch the image */
   position: absolute; /* Take the image out of the document flow */
@@ -124,4 +112,4 @@ const StyledParagraph = styled.p`
   }
 `;
 
-export { ImgContainer, StyledHeroCard, StyledImg, StyledParagraph, StyledSmallLoader, TitleH2 };
+export { ImgContainer, StyledHeroCard, StyledImg, StyledParagraph, TitleH2 };

@@ -1,19 +1,23 @@
 import styled from "styled-components";
 
 // TODO small loader via props
-const StyledLoader = styled.div`
+const StyledLoaderDiv = styled.div<{
+  $dim?: string;
+  $position?: string;
+  $circleDim?: string;
+}>`
   margin: 0 auto;
   margin-top: 50px;
   margin-bottom: 50px;
-  --dim: 3rem;
+  --dim: ${props => props.$dim || "3rem"};
   width: var(--dim);
   height: var(--dim);
-  position: relative;
+  position: ${props => props.$position || "relative"};
   animation: spin988 2s linear infinite;
 
   & .circle {
     --color: var(--text);
-    --dim: 1.2rem;
+    --dim: ${props => props.$circleDim || "1.2rem"};
     width: var(--dim);
     height: var(--dim);
     background-color: var(--color);
@@ -68,4 +72,4 @@ const StyledLoader = styled.div`
   }
 `;
 
-export default StyledLoader;
+export default StyledLoaderDiv;
