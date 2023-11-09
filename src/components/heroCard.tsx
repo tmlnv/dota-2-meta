@@ -11,9 +11,9 @@ const HeroCard: React.FC<HeroCardProps> = ({ name, imgSrc, winRate }) => {
   const [isImgLoading, setIsImgLoading] = useState(true);
 
   return (
-    <StyledHeroCard className="heroCard">
+    <StyledHeroCard>
       <Title>{name}</Title>
-      <ImgContainer className="image-container">
+      <ImgContainer>
         {isImgLoading && <StyledSmallLoader />}
         <StyledImg
           src={imgSrc}

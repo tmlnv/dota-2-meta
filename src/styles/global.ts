@@ -40,6 +40,12 @@ const GlobalStyle = createGlobalStyle`
     --text: var(--dark-text);
     --card-bg: var(--dark-card-bg);
     }
+
+    #root {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+      }
 `
 
 export default GlobalStyle;

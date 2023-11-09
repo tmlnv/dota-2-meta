@@ -1,9 +1,41 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { MMRMAPPING, OPEN_DOTA_API_URL, PICK_TIERS, WIN_TIERS } from "./config";
+import styled from "styled-components";
 import DropDown from "./DropDown";
 import HeroCard from "./HeroCard";
 import Loading from "./Loader";
+import { MMRMAPPING, OPEN_DOTA_API_URL, PICK_TIERS, WIN_TIERS } from "./config";
+
+const StyledPageHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+`;
+
+const StyledH1 = styled.h1`
+  font-size: 30px;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-bottom: 30px;
+}
+`;
+
+const StyledHeroSelector = styled.div`
+  display: flex;
+  gap: 20px;
+
+  &:before {
+    content: "Role & MMR";
+    color: var(--text);
+    margin-right: 10px;
+    margin-bottom: auto;
+    margin-top: auto;
+  }
+}
+`;
 
 const roles = [
   "All",
@@ -188,9 +220,9 @@ const Cards: React.FC = () => {
 
   return (
     <>
-      <header className="page-header">
-        <h1 className="title">Dota 2 Meta</h1>
-        <div className="hero-selector">
+      <StyledPageHeader>
+        <StyledH1>Dota 2 Meta</StyledH1>
+        <StyledHeroSelector>
           <DropDown
             id="roleDropdown"
             dataValue={roles}
@@ -201,8 +233,8 @@ const Cards: React.FC = () => {
             dataValue={Object.keys(MMRMAPPING)}
             onValueChange={(newValue) => setSelectedMmr(MMRMAPPING[newValue])}
           />
-        </div>
-      </header>
+        </StyledHeroSelector>
+      </StyledPageHeader>
       {isLoading ? (
         <Loading />
       ) : (

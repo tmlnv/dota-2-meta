@@ -1,4 +1,38 @@
 import React, { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+
+const StyledDropDown = styled.div`
+  position: relative;
+  width: 200px;
+  color: var(--text);
+  margin-bottom: 10px;
+
+  &.open ul {
+    max-height: 150px; /* height to expand to */
+    border-bottom-left-radius: 10px; /* straight bottom-left when opened */
+    border-bottom-right-radius: 10px; /* straight bottom-right when opened */
+  }
+  
+  &.open .selected-option {
+    border-bottom: 0;
+    border-bottom-left-radius: 0; /* straight bottom-left when opened */
+    border-bottom-right-radius: 0; /* straight bottom-right when opened */
+  }
+}
+`;
+
+const StyledSelectedOption = styled.div`
+  padding: 10px;
+  border: 2px solid;
+  border-color: var(--text);
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: var(
+    --card-bg
+  ); /* Set background color to match the card's background */
+  background-clip: padding-box; /* Ensures background doesn't extend under the border */
+}
+`;
 
 interface DropDownProps {
   id: string;
@@ -41,14 +75,17 @@ const DropDown: React.FC<DropDownProps> = ({
   };
 
   return (
-    <div
+    <StyledDropDown
       ref={dropdownRef}
-      className={`dropdown ${isOpen ? "open" : ""}`}
+      className={`${isOpen ? "open" : ""}`}
       id={id}
     >
-      <div className="selected-option" onClick={() => setIsOpen(!isOpen)}>
+      <StyledSelectedOption
+        className="selected-option"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         {selectedValue}
-      </div>
+      </StyledSelectedOption>
       <ul className={`options-list ${isOpen ? "" : "hidden"}`}>
         {dataValue.map((value, index) => (
           <li
@@ -63,7 +100,7 @@ const DropDown: React.FC<DropDownProps> = ({
           </li>
         ))}
       </ul>
-    </div>
+    </StyledDropDown>
   );
 };
 
