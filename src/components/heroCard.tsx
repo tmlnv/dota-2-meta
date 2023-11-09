@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyledHeroCard, Title, ImgContainer, StyledSmallLoader, StyledImg, StyledParagraph } from "../styles/heroCard";
+import { StyledHeroCard, TitleH2, ImgContainer, StyledSmallLoader, StyledImg, StyledParagraph } from "../styles/heroCard";
 
 interface HeroCardProps {
   name: string;
@@ -12,7 +12,7 @@ const HeroCard: React.FC<HeroCardProps> = ({ name, imgSrc, winRate }) => {
 
   return (
     <StyledHeroCard>
-      <Title>{name}</Title>
+      <TitleH2>{name}</TitleH2>
       <ImgContainer>
         {isImgLoading && <StyledSmallLoader />}
         <StyledImg
