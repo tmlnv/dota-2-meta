@@ -1,4 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+import {
+  StyledDropDown,
+  StyledLi,
+  StyledSelectedOption,
+  StyledUl,
+} from "../styles/dropDown";
 
 interface DropDownProps {
   id: string;
@@ -41,17 +47,20 @@ const DropDown: React.FC<DropDownProps> = ({
   };
 
   return (
-    <div
+    <StyledDropDown
       ref={dropdownRef}
-      className={`dropdown ${isOpen ? "open" : ""}`}
+      className={`${isOpen ? "open" : ""}`}
       id={id}
     >
-      <div className="selected-option" onClick={() => setIsOpen(!isOpen)}>
+      <StyledSelectedOption
+        className="selected-option"
+        onClick={() => setIsOpen(!isOpen)}
+      >
         {selectedValue}
-      </div>
-      <ul className={`options-list ${isOpen ? "" : "hidden"}`}>
+      </StyledSelectedOption>
+      <StyledUl className={`${isOpen ? "" : "hidden"}`}>
         {dataValue.map((value, index) => (
-          <li
+          <StyledLi
             key={index}
             data-value={value}
             onClick={() => {
@@ -60,10 +69,10 @@ const DropDown: React.FC<DropDownProps> = ({
             }}
           >
             {value}
-          </li>
+          </StyledLi>
         ))}
-      </ul>
-    </div>
+      </StyledUl>
+    </StyledDropDown>
   );
 };
 

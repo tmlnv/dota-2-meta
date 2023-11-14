@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import StyledButton from "../styles/colorThemeButton";
 
 const ColorThemeToggleButton = () => {
   const [dark, setDark] = useState(() => {
@@ -26,9 +27,9 @@ const ColorThemeToggleButton = () => {
   };
 
   return (
-    <button id="colorThemeToggleButton" onClick={toggleTheme}>
+    <StyledButton onClick={toggleTheme}>
       Switch Color Theme
-    </button>
+    </StyledButton>
   );
 };
 

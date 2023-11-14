@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import Loader from "./loader";
+import {
+  ImgContainer,
+  StyledHeroCard,
+  StyledImg,
+  StyledParagraph,
+  TitleH2,
+} from "../styles/heroCard";
+import Loader from "./Loader";
 
 interface HeroCardProps {
   name: string;
@@ -11,19 +18,21 @@ const HeroCard: React.FC<HeroCardProps> = ({ name, imgSrc, winRate }) => {
   const [isImgLoading, setIsImgLoading] = useState(true);
 
   return (
-    <div className="heroCard">
-      <h2>{name}</h2>
-      <div className="image-container">
-        {isImgLoading && <Loader />}
-        <img
+    <StyledHeroCard>
+      <TitleH2>{name}</TitleH2>
+      <ImgContainer>
+        {isImgLoading && (
+          <Loader $dim="2rem" $position="absolute" $circleDim="0.7rem" />
+        )}
+        <StyledImg
           src={imgSrc}
           alt={`${name} thumbnail`}
           style={{ display: isImgLoading ? "none" : "block" }}
           onLoad={() => setIsImgLoading(false)}
         />
-      </div>
-      <p>Winrate: {winRate}%</p>
-    </div>
+      </ImgContainer>
+      <StyledParagraph>Winrate: {winRate}%</StyledParagraph>
+    </StyledHeroCard>
   );
 };
 

@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import DropDown from "./DropDown";
+import HeroCard from "./HeroCard";
+import Loading from "./Loader";
 import { MMRMAPPING, OPEN_DOTA_API_URL, PICK_TIERS, WIN_TIERS } from "./config";
-import DropDown from "./dropDown";
-import HeroCard from "./heroCard";
-import Loading from "./loader";
+import { StyledPageHeader, StyledTitleH1, StyledHeroSelector, StyledHeroCardsMain, StyledErrorDiv } from "../styles/cards";
 
 const roles = [
   "All",
@@ -44,7 +45,7 @@ type MetaHero = {
   heroImg: string;
 };
 
-const Cards: React.FC = () => {
+const Cards: React.FC = (props) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [apiData, setApiData] = useState<Hero[]>([]);
@@ -188,9 +189,9 @@ const Cards: React.FC = () => {
 
   return (
     <>
-      <header className="page-header">
-        <h1 className="title">Dota 2 Meta</h1>
-        <div className="hero-selector">
+      <StyledPageHeader {...props}>
+        <StyledTitleH1>Dota 2 Meta</StyledTitleH1>
+        <StyledHeroSelector>
           <DropDown
             id="roleDropdown"
             dataValue={roles}
@@ -201,14 +202,14 @@ const Cards: React.FC = () => {
             dataValue={Object.keys(MMRMAPPING)}
             onValueChange={(newValue) => setSelectedMmr(MMRMAPPING[newValue])}
           />
-        </div>
-      </header>
+        </StyledHeroSelector>
+      </StyledPageHeader>
       {isLoading ? (
         <Loading />
       ) : (
         <>
           {!errorApi && (
-            <main id="heroCards" className="hero-cards">
+            <StyledHeroCardsMain>
               {heroes.map(({ heroName, heroImg, heroWinRate }) => (
                 <HeroCard
                   key={heroName}
@@ -217,9 +218,9 @@ const Cards: React.FC = () => {
                   winRate={heroWinRate}
                 />
               ))}
-            </main>
+            </StyledHeroCardsMain>
           )}
-          {!!errorApi && <div className="error">{errorApi}</div>}
+          {!!errorApi && <StyledErrorDiv>{errorApi}</StyledErrorDiv>}
         </>
       )}
     </>
