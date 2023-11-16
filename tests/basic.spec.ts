@@ -11,8 +11,6 @@ test.describe('all', () => {
     test('has title', async ({ page }) => {
         // Expect a title "to contain" a substring.
         await expect(page).toHaveTitle(/Dota 2 Meta/);
-
-        await new Promise(res => setTimeout(res, 2000));
     });
 
     for (let role of ALL_ROLES) {
