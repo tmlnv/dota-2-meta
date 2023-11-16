@@ -25,3 +25,7 @@ dist-ssr
 
 # custom
 tmp
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
