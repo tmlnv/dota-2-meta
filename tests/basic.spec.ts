@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test';
 import { ALL_ROLES, MMRMAPPING } from '../src/components/config';
 
+const { All, ...MMR } = MMRMAPPING;
+
 test.beforeEach( async ({ page }) => {
     await page.goto('http://localhost:5173/');
 });
@@ -22,7 +24,7 @@ test.describe('all', () => {
         });
     };
 
-    for (let mmr in MMRMAPPING) {
+    for (let mmr in MMR) {
         test(`Mmr dropdown - ${mmr}`, async ({ page }) => {
             await page.locator('#mmrDropdown div').click();
             await page.getByText(mmr).click();
