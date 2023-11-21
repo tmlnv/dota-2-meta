@@ -3,19 +3,8 @@ import React, { useEffect, useState } from "react";
 import DropDown from "./DropDown";
 import HeroCard from "./HeroCard";
 import Loading from "./Loader";
-import { MMRMAPPING, OPEN_DOTA_API_URL, PICK_TIERS, WIN_TIERS } from "./config";
+import { ALL_ROLES, MMRMAPPING, OPEN_DOTA_API_URL, PICK_TIERS, WIN_TIERS } from "./config";
 import { StyledPageHeader, StyledTitleH1, StyledHeroSelector, StyledHeroCardsMain, StyledErrorDiv } from "../styles/cards";
-
-const roles = [
-  "All",
-  "Carry",
-  "Nuker",
-  "Support",
-  "Pusher",
-  "Initiator",
-  "Durable",
-  "Disabler",
-];
 
 interface Hero {
   localized_name: string;
@@ -194,7 +183,7 @@ const Cards: React.FC = (props) => {
         <StyledHeroSelector>
           <DropDown
             id="roleDropdown"
-            dataValue={roles}
+            dataValue={ALL_ROLES}
             onValueChange={(newValue) => setSelectedRole(newValue)}
           />
           <DropDown
