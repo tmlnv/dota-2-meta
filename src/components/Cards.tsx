@@ -1,10 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import {
+  ALL_ROLES,
+  CDN_STEAM_IMG_URL,
+  MMRMAPPING,
+  OPEN_DOTA_API_URL,
+  PICK_TIERS,
+  WIN_TIERS,
+} from "../config";
+import {
+  StyledErrorDiv,
+  StyledHeroCardsMain,
+  StyledHeroSelector,
+  StyledPageHeader,
+  StyledTitleH1,
+} from "../styles/cards";
 import DropDown from "./DropDown";
 import HeroCard from "./HeroCard";
 import Loading from "./Loader";
-import { ALL_ROLES, MMRMAPPING, OPEN_DOTA_API_URL, PICK_TIERS, WIN_TIERS } from "./config";
-import { StyledPageHeader, StyledTitleH1, StyledHeroSelector, StyledHeroCardsMain, StyledErrorDiv } from "../styles/cards";
 
 interface Hero {
   localized_name: string;
@@ -105,7 +118,7 @@ const Cards: React.FC = (props) => {
       byWinRate.push({
         heroName: hero.localized_name,
         heroWinRate: parseFloat(winrate.toFixed(2)),
-        heroImg: hero.img,
+        heroImg: `${CDN_STEAM_IMG_URL}${hero.img.split(".com")[1]}`,
       });
     }
 
