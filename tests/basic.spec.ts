@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
-import { ALL_ROLES, MMRMAPPING } from '../src/components/config';
+import { ALL_ROLES, MMRMAPPING } from '../src/config';
 
+const [ AllFromRoles, ...ROLES ] = ALL_ROLES;
 const { All, ...MMR } = MMRMAPPING;
 
 test.beforeEach( async ({ page }) => {
@@ -13,7 +14,7 @@ test.describe('all', () => {
         await expect(page).toHaveTitle(/Dota 2 Meta/);
     });
 
-    for (let role of ALL_ROLES) {
+    for (let role of ROLES) {
         test(`Role dropdown - ${role}`, async ({ page }) => {
             await page.locator('#roleDropdown div').click();
             await page.getByText(role).click();
