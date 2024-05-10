@@ -43,6 +43,12 @@ const ToggleSlider = styled.div<{ checked: boolean }>`
   ${(props) => (props.checked ? "left: 1.6em; background-color: #212121" : "")}
 `;
 
+const StyledSpan = styled.span<{ white?: boolean }>`
+  display: flex;
+
+  color: ${(props) => (props.white ? "white" : "black")};
+`;
+
 const Icon = styled.svg`
   display: inline-block;
   height: 1em;
@@ -51,4 +57,4 @@ const Icon = styled.svg`
   box-sizing: border-box;
 `;
 
-export { ThemeSwitch, ThemeCheckbox, Label, ToggleSlider, Icon };
+export { ThemeSwitch, ThemeCheckbox, Label, ToggleSlider, StyledSpan, Icon };
