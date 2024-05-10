@@ -29,7 +29,7 @@ const Label = styled.label<{ checked: boolean }>`
   }
 `;
 
-const ToggleSlider = styled.div`
+const ToggleSlider = styled.div<{ checked: boolean }>`
   width: 0.8em;
   height: 0.8em;
   border-radius: inherit;
@@ -39,6 +39,8 @@ const ToggleSlider = styled.div`
   z-index: 10;
   transition: 0.5s cubic-bezier(1, 0.33, 0.11, 1.34);
   background-color: #f2f2f2;
+
+  ${(props) => (props.checked ? "left: 1.6em; background-color: #212121" : "")}
 `;
 
 const Icon = styled.svg`

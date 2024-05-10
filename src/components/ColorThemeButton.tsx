@@ -41,12 +41,13 @@ const ColorThemeToggleButton = () => {
       <ThemeCheckbox id="theme-checkbox" onChange={toggleTheme} />
       <Label htmlFor="theme-checkbox" checked={dark}>
         <ToggleSlider
+          checked={dark}
           style={{
             left: dark ? "1.6em" : "0.1em",
             backgroundColor: dark ? "#212121" : "#f2f2f2",
           }}
         />
-        <span>
+        <span style={{ display: "flex" }}>
           <Icon
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -60,7 +61,7 @@ const ColorThemeToggleButton = () => {
             />
           </Icon>
         </span>
-        <span>
+        <span style={{ display: "flex", color: "white" }}>
           <Icon
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
