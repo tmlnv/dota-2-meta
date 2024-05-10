@@ -32,9 +32,9 @@ const ColorThemeToggleButton = () => {
     // Switch Color Theme
     // </StyledButton>
     <ThemeSwitch>
-      <ThemeCheckbox id="theme-checkbox" onChange={toggleTheme} checked={dark} />
-      <Label htmlFor="theme-checkbox">
-        <ToggleSlider style={{ left: dark ? '1.6em' : '0.1em', backgroundColor: dark ? '#212121' : '#f2f2f2' }} />
+      <ThemeCheckbox id="theme-checkbox" onChange={toggleTheme} />
+      <Label htmlFor="theme-checkbox" checked={dark}>
+        <ToggleSlider checked={dark} style={{ left: dark ? '1.6em' : '0.1em', backgroundColor: dark ? '#212121' : '#f2f2f2' }} />
         <span>
           <Icon
             xmlns="http://www.w3.org/2000/svg"

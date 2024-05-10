@@ -11,7 +11,7 @@ const ThemeCheckbox = styled.input.attrs({ type: 'checkbox' })`
   display: none;
 `;
 
-const Label = styled.label`
+const Label = styled.label<{ checked: boolean }>`
   font-size: 2rem;
   height: 1em;
   width: 2.5em;
@@ -19,7 +19,7 @@ const Label = styled.label`
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  background-color: #cecece;
+  background-color: ${props => props.checked ? '#3a3a3a' : '#cecece'};
   position: relative;
 
   &:active {
