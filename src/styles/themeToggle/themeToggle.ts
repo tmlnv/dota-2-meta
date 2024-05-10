@@ -7,7 +7,7 @@ const ThemeSwitch = styled.div`
   direction: rtl;
 `;
 
-const ThemeCheckbox = styled.input.attrs({ type: 'checkbox' })`
+const ThemeCheckbox = styled.input.attrs({ type: "checkbox" })`
   display: none;
 `;
 
@@ -19,7 +19,8 @@ const Label = styled.label<{ checked: boolean }>`
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  background-color: ${props => props.checked ? '#3a3a3a' : '#cecece'};
+  background-color: #cecece;
+  background-color: ${(props) => (props.checked ? "#3a3a3a" : "#cecece")};
   position: relative;
 
   &:active {
@@ -49,4 +50,3 @@ const Icon = styled.svg`
 `;
 
 export { ThemeSwitch, ThemeCheckbox, Label, ToggleSlider, Icon };
-
